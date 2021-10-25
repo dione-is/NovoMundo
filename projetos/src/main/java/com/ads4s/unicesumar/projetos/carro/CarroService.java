@@ -16,5 +16,13 @@ public class CarroService {
 	public List<Carro> obterTodos(){
 		return repo.findAll();
 	}
+	
+	public String insert(Carro novo) {
+		if(repo.findById(novo.getId()).isPresent()) {
+			throw new RuntimeException("esse carro ja existe");
+		}
+		novo = repo.save(novo);
+		return novo.getId();
+	}
 
 }
