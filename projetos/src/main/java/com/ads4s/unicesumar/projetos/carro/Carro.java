@@ -2,6 +2,7 @@ package com.ads4s.unicesumar.projetos.carro;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -10,11 +11,16 @@ public class Carro {
 	@Id
 	private String id;
 	
+	@Column(nullable = false)
 	private String modelo;
-	private int anoDeFabricacao;
+	@Column(nullable = false)
+	private Integer anoDeFabricacao;
+	@Column(unique = true,nullable = false)
 	private String placa;
+	@Column(unique = true,nullable = false)
 	private String codigoRenavam;
-	private int kilometragem;
+	@Column(nullable = false)
+	private Integer kilometragem;
 	
 	public Carro() {
 		id = UUID.randomUUID().toString();

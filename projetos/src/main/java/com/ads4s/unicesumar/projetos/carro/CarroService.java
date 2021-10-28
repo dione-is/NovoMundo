@@ -19,7 +19,7 @@ public class CarroService {
 	
 	public String insert(Carro novo) {
 		if(repo.findById(novo.getId()).isPresent()) {
-			throw new RuntimeException("esse carro ja existe");
+			throw new createJaExiste();
 		}
 		novo = repo.save(novo);
 		return novo.getId();
