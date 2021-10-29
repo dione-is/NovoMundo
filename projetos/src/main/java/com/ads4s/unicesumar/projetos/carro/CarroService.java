@@ -1,6 +1,7 @@
 package com.ads4s.unicesumar.projetos.carro;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,28 @@ public class CarroService {
 		return novo.getId();
 	}
 
+	public void atualizar(Carro carro ) {
+		// TODO Auto-generated method stub
+		if(!repo.findById(carro.getId()).isPresent()) {
+			throw new RegistroNaoExiste();
+		}
+		repo.save(carro);
+	}
+	
+	public Carro obterPeloId(String id) {
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException e) {
+			throw new RegistroNaoExiste();
+		}
+	}
+
+	public void excluirPeloId(String id) {
+		try {
+			Carro recuperado = repo.findById(id).get();
+			repo.delete(recuperado);
+		} catch (NoSuchElementException e) {
+			throw new RegistroNaoExiste();
+		}
+	}
 }
